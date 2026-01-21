@@ -1,0 +1,35 @@
+const express = require('express');
+const cors = require('cors');
+const app = express();
+const port = 5000; // 和 React 的 5731 端口区分开
+
+// 基础中间件
+app.use(cors());
+app.use(express.json());
+
+app.post('/api/post-c-code', (req, res) => {
+    const {content} = req.body;
+
+    if(!content){
+        return res.json({ code: 400, message: '代码不能为空！'});
+    }
+
+    res.json({
+        code: 200,
+        message: '代码传输成功！',
+        data: {
+            length: content.length,
+            tip: '后端已收到'
+        }
+    });
+});
+
+// 唯一的测试接口
+app.get('/api/hello', (req, res) => {
+  res.json({ message: 'React + Node 联动成功' });
+});
+
+// 启动服务
+app.listen(port, () => {
+  console.log(`后端服务运行在 http://localhost:${port}`);
+});
