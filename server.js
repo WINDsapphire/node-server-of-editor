@@ -8,6 +8,13 @@ const { exec } = require('child_process');
 const util = require('util');
 const execAsync = util.promisify(exec); // 转为Promise风格，方便异步处理
 
+const corsOptions = {
+  origin: 'http://101.251.162.28:5000', 
+  allowedHeaders: ['Content-Type', 'Authorization'], 
+  methods: ['GET', 'POST', 'OPTIONS'], 
+  credentials: true 
+};
+
 // 基础中间件
 app.use(cors());
 app.use(express.json());
